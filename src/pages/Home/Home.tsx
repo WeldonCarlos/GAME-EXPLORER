@@ -1,61 +1,124 @@
 import { useEffect, useState } from "react";
-import { Container, Typography, Grid, Button, Stack } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Grid,
+  Button,
+  Stack,
+  CircularProgress,
+  Box,
+} from "@mui/material";
+
 import { getGames } from "../../services/gameService";
 import type { Game } from "../../types/Game";
+
 import { GameCard } from "../../components/GameCard/GameCard";
+import { HeroBanner } from "../../components/HeroBanner/HeroBanner";
 
 export function Home() {
   const [games, setGames] = useState<Game[]>([]);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function loadGames() {
-      const data = await getGames(page);
-      setGames(data);
+      try {
+        setLoading(true);
+
+        const data = await getGames(page);
+
+        setGames(data);
+      } catch (error) {
+        console.error("Erro ao carregar jogos:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
     loadGames();
   }, [page]);
 
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          height: "80vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress size={60} />
+      </Box>
+    );
+  }
+
   return (
-    <Container sx={{ marginTop: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Jogos em Destaque
-      </Typography>
+    <>
+      {/* HERO */}
+      {games.length > 0 && <HeroBanner game={games[0]} />}
 
-      <Grid container spacing={3}>
-        {games.map((game) => (
-          <Grid item key={game.id} xs={12} sm={6} md={4}>
-            <GameCard
-              name={game.name}
-              image={game.background_image}
-              released={game.released}
-            />
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* PAGINAÇÃO */}
-      <Stack direction="row" spacing={2} justifyContent="center" mt={4}>
-        <Button
-          variant="contained"
-          disabled={page === 1}
-          onClick={() => setPage((prev) => prev - 1)}
+      {/* LISTAGEM */}
+      <Container sx={{ mt: 6 }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            fontWeight: "bold",
+            mb: 4,
+          }}
         >
-          Prev
-        </Button>
-
-        <Typography sx={{ display: "flex", alignItems: "center" }}>
-          Página {page}
+          Jogos Recomendados
         </Typography>
 
-        <Button
-          variant="contained"
-          onClick={() => setPage((prev) => prev + 1)}
+        <Grid container spacing={3}>
+          {games.map((game) => (
+            <Grid
+              key={game.id}
+              size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+            >
+              <GameCard
+                name={game.name}
+                image={game.background_image}
+                released={game.released}
+              />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* PAGINAÇÃO */}
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+          mt={6}
+          mb={4}
         >
-          Next
-        </Button>
-      </Stack>
-    </Container>
+          <Button
+            variant="contained"
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            Prev
+          </Button>
+
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            Página {page}
+          </Typography>
+
+          <Button
+            variant="contained"
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Next
+          </Button>
+        </Stack>
+      </Container>
+    </>
   );
 }
