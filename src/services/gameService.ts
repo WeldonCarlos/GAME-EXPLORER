@@ -11,7 +11,7 @@ export async function getGames(page: number): Promise<Game[]> {
       params: {
         key: API_KEY,
         page,
-        page_size: 20,
+        page_size: 8,
       },
     }
   );
