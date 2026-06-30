@@ -20,7 +20,7 @@ export function HeroBanner({ game }: HeroBannerProps) {
 
         backgroundImage: `url(${game.background_image})`,
         backgroundSize: "cover",
-       backgroundPosition: "top center"
+        backgroundPosition: "top center"
       }}
     >
       {/* Overlay escuro */}
