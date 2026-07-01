@@ -7,57 +7,69 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+import type { Game } from "../../types/Game";
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
+
 interface GameCardProps {
-  id: number;
-  name: string;
-  image: string;
-  released: string;
+  game: Game;
 }
 
-export function GameCard({
-  id,
-  name,
-  image,
-  released,
-}: GameCardProps) {
-
+export function GameCard({ game }: GameCardProps) {
   const navigate = useNavigate();
 
   return (
     <Card
-      onClick={() => navigate(`/game/${id}`)}
+      onClick={() => navigate(`/game/${game.id}`)}
       sx={{
+        position: "relative",
         height: "100%",
+        display: "flex",
+        flexDirection: "column",
         backgroundColor: "background.paper",
         borderRadius: 3,
         overflow: "hidden",
-        transition: "all .3s ease",
+        cursor: "pointer",
+        userSelect: "none",
+        transition: "transform .25s ease, box-shadow .25s ease",
 
         "&:hover": {
-          transform: "scale(1.05)",
-          cursor: "pointer",
-          boxShadow: 8,
+          transform: "translateY(-6px)",
+          boxShadow: 10,
         },
       }}
     >
+      <FavoriteButton game={game} />
+
       <CardMedia
         component="img"
+        image={game.background_image}
+        alt={game.name}
         height="220"
-        image={image}
-        alt={name}
+        draggable={false}
+        loading="lazy"
+        sx={{
+          objectFit: "cover",
+        }}
       />
 
-      <CardContent>
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          gutterBottom
-          noWrap
-        >
-          {name}
-        </Typography>
-
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <Box>
+          <Typography
+            variant="h6"
+            fontWeight={700}
+            gutterBottom
+            noWrap
+          >
+            {game.name}
+          </Typography>
+
           <Typography
             variant="body2"
             color="text.secondary"
@@ -66,7 +78,7 @@ export function GameCard({
           </Typography>
 
           <Typography variant="body1">
-            {released || "Não informado"}
+            {game.released || "Não informado"}
           </Typography>
         </Box>
       </CardContent>
