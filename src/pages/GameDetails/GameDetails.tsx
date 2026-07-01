@@ -8,6 +8,8 @@ import {
   CircularProgress,
   Chip,
   Stack,
+  Link,
+  Divider,
 } from "@mui/material";
 
 import { getGameById } from "../../services/gameService";
@@ -59,39 +61,162 @@ export function GameDetails() {
   }
 
   return (
-    <Container sx={{ py: 5 }}>
+    <Container maxWidth="lg" sx={{ py: 5 }}>
+
       <Box
         component="img"
         src={game.background_image}
         alt={game.name}
         sx={{
           width: "100%",
+          maxHeight: 500,
+          objectFit: "cover",
           borderRadius: 4,
           mb: 4,
         }}
       />
 
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h3" fontWeight="bold" gutterBottom>
         {game.name}
       </Typography>
 
-      <Typography variant="h6" color="text.secondary">
-        Lançamento: {game.released}
+      <Stack
+        direction={{ xs: "column", md: "row" }}
+        spacing={4}
+        sx={{ mb: 4 }}
+      >
+        <Typography variant="h6">
+          📅 Lançamento: {game.released}
+        </Typography>
+
+        <Typography variant="h6">
+          ⭐ Nota: {game.rating}
+        </Typography>
+
+        {game.metacritic_platforms?.length && (
+          <Typography variant="h6">
+            🏆 Metacritic: {game.metacritic_platforms[0].metascore}
+          </Typography>
+        )}
+      </Stack>
+
+      <Divider sx={{ mb: 4 }} />
+
+      {/* GÊNEROS */}
+
+      <Typography variant="h5" gutterBottom>
+        🎮 Gêneros
       </Typography>
 
-      <Typography variant="h6" sx={{ mb: 3 }}>
-        ⭐ Nota: {game.rating}
+      <Stack
+        direction="row"
+        spacing={1}
+        flexWrap="wrap"
+        useFlexGap
+        mb={4}
+      >
+        {game.genres?.map((genre) => (
+          <Chip
+            key={genre.id}
+            label={genre.name}
+            color="primary"
+          />
+        ))}
+      </Stack>
+
+      {/* DESENVOLVEDORAS */}
+
+      <Typography variant="h5" gutterBottom>
+        🏢 Desenvolvedoras
       </Typography>
 
-      <Typography sx={{ mb: 4 }}>
+      <Stack
+        direction="row"
+        spacing={1}
+        flexWrap="wrap"
+        useFlexGap
+        mb={4}
+      >
+        {game.developers?.map((developer) => (
+          <Chip
+            key={developer.id}
+            label={developer.name}
+            color="secondary"
+          />
+        ))}
+      </Stack>
+
+      {/* PUBLISHERS */}
+
+      <Typography variant="h5" gutterBottom>
+        📦 Publishers
+      </Typography>
+
+      <Stack
+        direction="row"
+        spacing={1}
+        flexWrap="wrap"
+        useFlexGap
+        mb={4}
+      >
+        {game.publishers?.map((publisher) => (
+          <Chip
+            key={publisher.id}
+            label={publisher.name}
+            variant="outlined"
+          />
+        ))}
+      </Stack>
+
+      {/* WEBSITE */}
+
+      {game.website && (
+        <>
+          <Typography variant="h5" gutterBottom>
+            🌐 Website Oficial
+          </Typography>
+
+          <Link
+            href={game.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            underline="hover"
+          >
+            {game.website}
+          </Link>
+
+          <Divider sx={{ my: 4 }} />
+        </>
+      )}
+
+      {/* DESCRIÇÃO */}
+
+      <Typography variant="h5" gutterBottom>
+        📖 Descrição
+      </Typography>
+
+      <Typography
+        sx={{
+          mb: 5,
+          lineHeight: 1.8,
+          textAlign: "justify",
+        }}
+      >
         {game.description_raw}
       </Typography>
 
+      {/* PLATAFORMAS */}
+
       <Typography variant="h5" gutterBottom>
-        Plataformas
+        🕹 Plataformas
       </Typography>
 
-      <Stack direction="row" spacing={1} flexWrap="wrap">
+      <Stack
+        direction="row"
+        spacing={1}
+        flexWrap="wrap"
+        useFlexGap
+      >
         {game.platforms?.map((item) => (
           <Chip
             key={item.platform.id}
