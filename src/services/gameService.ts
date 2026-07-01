@@ -15,6 +15,7 @@ export async function getGames(
       params: {
         key: API_KEY,
         page,
+        page_size: 8,
         search,
        
       },
