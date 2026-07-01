@@ -8,7 +8,7 @@ Game Explorer é uma aplicação web desenvolvida em React que consome a API da 
 
 ## 🚀 Demonstração
 
-> Projeto em produção (adicione aqui depois o link do Netlify):
+> Projeto em produção:
 https:https://levelgamelibary.netlify.app/
 
 ---
