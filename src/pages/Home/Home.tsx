@@ -4,7 +4,6 @@ import {
     Typography,
     Grid,
     Button,
-    Stack,
     CircularProgress,
     Box,
 } from "@mui/material";
@@ -204,7 +203,7 @@ export function Home() {
                             textAlign: "center",
                         }}
                     >
-                        <Typography fontWeight="bold">
+                        <Typography sx={{fontWeight:"bold"}}>
                             Página {page}
                         </Typography>
                     </Box>
