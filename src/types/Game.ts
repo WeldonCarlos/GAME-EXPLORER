@@ -1,3 +1,32 @@
+export interface ApiEntity {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+}
+
+export interface Platform {
+  id: number;
+  name: string;
+}
+
+export interface GamePlatform {
+  platform: Platform;
+}
+
+export interface MetacriticPlatform {
+  metascore: number;
+
+  url: string;
+
+  platform: {
+    platform: number;
+    name: string;
+    slug: string;
+  };
+}
+
 export interface Game {
   id: number;
   name: string;
@@ -7,10 +36,15 @@ export interface Game {
 
   description_raw?: string;
 
-  platforms?: {
-    platform: {
-      id: number;
-      name: string;
-    };
-  }[];
+  website?: string;
+
+  genres?: ApiEntity[];
+
+  developers?: ApiEntity[];
+
+  publishers?: ApiEntity[];
+
+  metacritic_platforms?: MetacriticPlatform[];
+
+  platforms?: GamePlatform[];
 }
