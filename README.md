@@ -1,73 +1,66 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🎮 Game Explorer
 
-Currently, two official plugins are available:
+Game Explorer é uma aplicação web desenvolvida em React que consome a API da RAWG para exibir informações sobre jogos, incluindo detalhes, gêneros, desenvolvedores, avaliações e muito mais.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Demonstração
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+> Projeto em produção (adicione aqui depois o link do Netlify):
+https:https://levelgamelibary.netlify.app/
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📸 Preview
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Home
+  
+  <img width="1902" height="942" alt="image" src="https://github.com/user-attachments/assets/955052c1-4d7b-4a8a-96a1-d1ae43cf6ac1" />
+  <img width="1900" height="928" alt="image" src="https://github.com/user-attachments/assets/9ced111c-e659-4df6-9722-68ae79f9e880" />
+  <img width="1898" height="209" alt="image" src="https://github.com/user-attachments/assets/26d00ce3-b81a-4f12-8df5-d7af504be138" />
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Detalhes do jogo
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+  <img width="1902" height="920" alt="image" src="https://github.com/user-attachments/assets/8fb90b82-28a1-4d8e-b783-b4d3dbe2d0ea" />
+  <img width="1904" height="923" alt="image" src="https://github.com/user-attachments/assets/487a729c-25f5-4a3c-a6f3-d4f61d87e91e" />
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Favoritos
+  <img width="1919" height="942" alt="image" src="https://github.com/user-attachments/assets/4d1d2e89-e98c-4343-a9c8-5d5187336bd7" />
+
+
+---
+
+## 🧠 Funcionalidades
+
+- Listagem de jogos via API
+- Página de detalhes do jogo
+- Banner destaque (Hero)
+- Sistema de favoritos
+- Formatação de datas em pt-BR
+- Layout responsivo (mobile-first)
+- UI com Material UI
+- Navegação com React Router
+
+---
+
+## 🛠️ Tecnologias
+
+- React
+- TypeScript
+- Vite
+- Material UI
+- React Router DOM
+- RAWG API
+
+---
+
+## 📦 Instalação
+
+Clone o repositório: 
+
+```bash
+git clone https://github.com/WeldonCarlos/GAME-EXPLORER.git
