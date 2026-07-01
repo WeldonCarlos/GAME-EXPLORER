@@ -7,7 +7,6 @@ import {
   Box,
   CircularProgress,
   Chip,
-  Stack,
   Link,
   Divider,
 } from "@mui/material";
@@ -29,7 +28,6 @@ export function GameDetails() {
         if (!id) return;
 
         const data = await getGameById(id);
-
         setGame(data);
       } catch (error) {
         console.error(error);
@@ -76,14 +74,18 @@ export function GameDetails() {
         }}
       />
 
-      <Typography variant="h3" fontWeight="bold" gutterBottom>
+      <Typography variant="h3" gutterBottom sx={{ fontWeight: "bold" }}>
         {game.name}
       </Typography>
 
-      <Stack
-        direction={{ xs: "column", md: "row" }}
-        spacing={4}
-        sx={{ mb: 4 }}
+      {/* INFO (Stack → Box) */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          gap: 4,
+          mb: 4,
+        }}
       >
         <Typography variant="h6">
           📅 Lançamento: {game.released}
@@ -98,78 +100,65 @@ export function GameDetails() {
             🏆 Metacritic: {game.metacritic_platforms[0].metascore}
           </Typography>
         )}
-      </Stack>
+      </Box>
 
       <Divider sx={{ mb: 4 }} />
 
       {/* GÊNEROS */}
-
       <Typography variant="h5" gutterBottom>
         🎮 Gêneros
       </Typography>
 
-      <Stack
-        direction="row"
-        spacing={1}
-        flexWrap="wrap"
-        useFlexGap
-        mb={4}
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 1,
+          mb: 4,
+        }}
       >
         {game.genres?.map((genre) => (
-          <Chip
-            key={genre.id}
-            label={genre.name}
-            color="primary"
-          />
+          <Chip key={genre.id} label={genre.name} color="primary" />
         ))}
-      </Stack>
+      </Box>
 
       {/* DESENVOLVEDORAS */}
-
       <Typography variant="h5" gutterBottom>
         🏢 Desenvolvedoras
       </Typography>
 
-      <Stack
-        direction="row"
-        spacing={1}
-        flexWrap="wrap"
-        useFlexGap
-        mb={4}
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 1,
+          mb: 4,
+        }}
       >
         {game.developers?.map((developer) => (
-          <Chip
-            key={developer.id}
-            label={developer.name}
-            color="secondary"
-          />
+          <Chip key={developer.id} label={developer.name} color="secondary" />
         ))}
-      </Stack>
+      </Box>
 
       {/* PUBLISHERS */}
-
       <Typography variant="h5" gutterBottom>
         📦 Publishers
       </Typography>
 
-      <Stack
-        direction="row"
-        spacing={1}
-        flexWrap="wrap"
-        useFlexGap
-        mb={4}
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 1,
+          mb: 4,
+        }}
       >
         {game.publishers?.map((publisher) => (
-          <Chip
-            key={publisher.id}
-            label={publisher.name}
-            variant="outlined"
-          />
+          <Chip key={publisher.id} label={publisher.name} variant="outlined" />
         ))}
-      </Stack>
+      </Box>
 
       {/* WEBSITE */}
-
       {game.website && (
         <>
           <Typography variant="h5" gutterBottom>
@@ -190,7 +179,6 @@ export function GameDetails() {
       )}
 
       {/* DESCRIÇÃO */}
-
       <Typography variant="h5" gutterBottom>
         📖 Descrição
       </Typography>
@@ -206,24 +194,22 @@ export function GameDetails() {
       </Typography>
 
       {/* PLATAFORMAS */}
-
       <Typography variant="h5" gutterBottom>
         🕹 Plataformas
       </Typography>
 
-      <Stack
-        direction="row"
-        spacing={1}
-        flexWrap="wrap"
-        useFlexGap
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 1,
+        }}
       >
         {game.platforms?.map((item) => (
-          <Chip
-            key={item.platform.id}
-            label={item.platform.name}
-          />
+          <Chip key={item.platform.id} label={item.platform.name} />
         ))}
-      </Stack>
+      </Box>
+
     </Container>
   );
 }

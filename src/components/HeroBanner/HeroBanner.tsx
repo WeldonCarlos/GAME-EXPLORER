@@ -51,8 +51,8 @@ export function HeroBanner({ game }: HeroBannerProps) {
       >
         <Typography
           variant="h2"
-          fontWeight="bold"
           gutterBottom
+          sx={{fontWeight:"bold"}}
         >
           {game.name}
         </Typography>
