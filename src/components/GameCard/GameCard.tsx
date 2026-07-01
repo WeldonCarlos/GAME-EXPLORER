@@ -17,6 +17,13 @@ interface GameCardProps {
 export function GameCard({ game }: GameCardProps) {
   const navigate = useNavigate();
 
+  // 📅 formatador de data (Brasil)
+  const formatDate = (date?: string) => {
+    if (!date) return "Não informado";
+
+    return new Date(date).toLocaleDateString("pt-BR");
+  };
+
   return (
     <Card
       onClick={() => navigate(`/game/${game.id}`)}
@@ -72,15 +79,12 @@ export function GameCard({ game }: GameCardProps) {
             {game.name}
           </Typography>
 
-          <Typography
-            variant="body2"
-            color="text.secondary"
-          >
+          <Typography variant="body2" color="text.secondary">
             Lançamento
           </Typography>
 
           <Typography variant="body1">
-            {game.released || "Não informado"}
+            {formatDate(game.released)}
           </Typography>
         </Box>
       </CardContent>

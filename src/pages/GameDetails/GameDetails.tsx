@@ -20,6 +20,13 @@ export function GameDetails() {
   const [game, setGame] = useState<Game | null>(null);
   const [loading, setLoading] = useState(false);
 
+  // 📅 formatador BR
+  const formatDate = (date?: string) => {
+    if (!date) return "Não informado";
+
+    return new Date(date).toLocaleDateString("pt-BR");
+  };
+
   useEffect(() => {
     async function loadGame() {
       try {
@@ -78,7 +85,7 @@ export function GameDetails() {
         {game.name}
       </Typography>
 
-      {/* INFO (Stack → Box) */}
+      {/* INFO */}
       <Box
         sx={{
           display: "flex",
@@ -88,14 +95,14 @@ export function GameDetails() {
         }}
       >
         <Typography variant="h6">
-          📅 Lançamento: {game.released}
+          📅 Lançamento: {formatDate(game.released)}
         </Typography>
 
         <Typography variant="h6">
           ⭐ Nota: {game.rating}
         </Typography>
 
-        {game.metacritic_platforms?.length && (
+        {game.metacritic_platforms?.length > 0 && (
           <Typography variant="h6">
             🏆 Metacritic: {game.metacritic_platforms[0].metascore}
           </Typography>
@@ -109,14 +116,7 @@ export function GameDetails() {
         🎮 Gêneros
       </Typography>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 1,
-          mb: 4,
-        }}
-      >
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 4 }}>
         {game.genres?.map((genre) => (
           <Chip key={genre.id} label={genre.name} color="primary" />
         ))}
@@ -127,14 +127,7 @@ export function GameDetails() {
         🏢 Desenvolvedoras
       </Typography>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 1,
-          mb: 4,
-        }}
-      >
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 4 }}>
         {game.developers?.map((developer) => (
           <Chip key={developer.id} label={developer.name} color="secondary" />
         ))}
@@ -145,14 +138,7 @@ export function GameDetails() {
         📦 Publishers
       </Typography>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 1,
-          mb: 4,
-        }}
-      >
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 4 }}>
         {game.publishers?.map((publisher) => (
           <Chip key={publisher.id} label={publisher.name} variant="outlined" />
         ))}
@@ -198,13 +184,7 @@ export function GameDetails() {
         🕹 Plataformas
       </Typography>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 1,
-        }}
-      >
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
         {game.platforms?.map((item) => (
           <Chip key={item.platform.id} label={item.platform.name} />
         ))}

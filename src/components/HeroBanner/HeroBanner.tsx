@@ -9,6 +9,13 @@ interface HeroBannerProps {
 export function HeroBanner({ game }: HeroBannerProps) {
   const navigate = useNavigate();
 
+  // 📅 formatador BR
+  const formatDate = (date?: string) => {
+    if (!date) return "Não informado";
+
+    return new Date(date).toLocaleDateString("pt-BR");
+  };
+
   return (
     <Box
       sx={{
@@ -16,11 +23,11 @@ export function HeroBanner({ game }: HeroBannerProps) {
         position: "relative",
         display: "flex",
         alignItems: "center",
-        px: 8,
+        px: { xs: 3, md: 8 },
 
         backgroundImage: `url(${game.background_image})`,
         backgroundSize: "cover",
-        backgroundPosition: "top center"
+        backgroundPosition: "top center",
       }}
     >
       {/* Overlay escuro */}
@@ -28,7 +35,6 @@ export function HeroBanner({ game }: HeroBannerProps) {
         sx={{
           position: "absolute",
           inset: 0,
-
           background: `
             linear-gradient(
               90deg,
@@ -52,23 +58,19 @@ export function HeroBanner({ game }: HeroBannerProps) {
         <Typography
           variant="h2"
           gutterBottom
-          sx={{fontWeight:"bold"}}
+          sx={{
+            fontWeight: "bold",
+            fontSize: { xs: "2rem", md: "3rem" },
+          }}
         >
           {game.name}
         </Typography>
 
-        <Typography
-          variant="h6"
-          color="text.secondary"
-          gutterBottom
-        >
-          Lançamento: {game.released}
+        <Typography variant="h6" color="text.secondary" gutterBottom>
+          Lançamento: {formatDate(game.released)}
         </Typography>
 
-        <Typography
-          variant="body1"
-          sx={{ mb: 4 }}
-        >
+        <Typography variant="body1" sx={{ mb: 4 }}>
           Nota: ⭐ {game.rating}
         </Typography>
 
