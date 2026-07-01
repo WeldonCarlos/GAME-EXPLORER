@@ -63,9 +63,11 @@ export function GameCard({ game }: GameCardProps) {
         <Box>
           <Typography
             variant="h6"
-            fontWeight={700}
             gutterBottom
             noWrap
+            sx={{
+              fontWeight: 700,
+            }}
           >
             {game.name}
           </Typography>

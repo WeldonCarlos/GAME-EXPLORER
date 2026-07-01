@@ -23,8 +23,9 @@ export function Favorites() {
     <Container sx={{ mt: 5, mb: 8 }}>
       <Typography
         variant="h3"
-        fontWeight="bold"
+        
         gutterBottom
+        sx={{fontWeight:"bold"}}
       >
         ❤️ Meus Favoritos
       </Typography>
